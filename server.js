@@ -1,16 +1,9 @@
-var express = require('express');
-const cors = require("cors");
+const express = require('express');
 // Sets up the Express App
 // =============================================================
-var app = express();
-var PORT = process.env.PORT || 8080;
-
-app.use(cors({
-    origin:["http://localhost:3000"]
-}));
-// app.use(cors({
-//     origin:["https://joesreactzoo.herokuapp.com"]
-// }));
+const routes = require("./routes");
+const app = express();
+const PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
 var db = require('./models');
@@ -19,21 +12,8 @@ var db = require('./models');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.get("/api/animals",(req,res)=>{
-//     db.Animal.findAll().then(animals=>{
-//         res.json(animals);
-//     })
-// })
-
-// app.get("/api/animals/class/:classname",(req,res)=>{
-//     db.Animal.findAll({
-//         where:{
-//             class:req.params.classname
-//         }
-//     }).then(animals=>{
-//         res.json(animals);
-//     })
-// })
+//Add routes, both API and view
+app.use(routes);
 
 db.sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
