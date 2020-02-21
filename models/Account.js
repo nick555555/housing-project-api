@@ -1,12 +1,25 @@
 module.exports = function(sequelize, DataTypes) {
     var Account = sequelize.define('Account', {
-        // add properites here
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING,
-        userID: DataTypes.STRING,
-        email: DataTypes.STRING,
-        password: DataTypes.STRING
+        firstName: { 
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        lastName: { 
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        userID: { 
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: { 
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: { 
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     });
-
     return Account;
 };

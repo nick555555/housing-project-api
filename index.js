@@ -1,7 +1,6 @@
 const express = require('express');
 // Sets up the Express App
 // =============================================================
-const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -12,8 +11,16 @@ var db = require('./models');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Add routes, both API and view
-app.use(routes);
+app.get("/api/accounts", (req, res) => {
+    db.Account.findAll().then(accounts => {
+        res.json(accounts);
+    })
+})
+app.post("/api/accounts", (req, res) => {
+    db.Account.create(req.body).then(data => {
+        res.json(data)
+    })
+})
 
 db.sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
