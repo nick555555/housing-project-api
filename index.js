@@ -22,6 +22,15 @@ app.get("/api/accounts", (req, res) => {
         res.json(accounts);
     })
 })
+app.get("/api/accounts/:id", (req, res) =>{
+    db.Account.findOne({
+        where: {
+            userID: req.params.id
+        }
+    }).then((data) => {
+        res.json(data);
+    })
+})
 app.post("/api/accounts", (req, res) => {
     db.Account.create(req.body).then(data => {
         res.json(data)
