@@ -1,8 +1,14 @@
 const express = require('express');
+const cors = require("cors");
 // Sets up the Express App
 // =============================================================
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    credentials: true
+}));
 
 // Requiring our models for syncing
 var db = require('./models');
@@ -23,9 +29,9 @@ app.post("/api/accounts", (req, res) => {
 })
 
 //sync({force: false})
-db.sequelize.sync().then(function() {
-    app.listen(PORT, function() {
-    console.log('App listening on PORT ' + PORT);
+db.sequelize.sync().then(function () {
+    app.listen(PORT, function () {
+        console.log('App listening on PORT ' + PORT);
     });
 });
 // app.listen(PORT, function () {
