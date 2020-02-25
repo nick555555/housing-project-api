@@ -6,8 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(cors({
-    origin: ["https://mhauthority.herokuapp.com/"],
-    credentials: true
+    origin: ["https://mhauthority.herokuapp.com"]
 }));
 
 // Requiring our models for syncing
